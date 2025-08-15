@@ -1,0 +1,42 @@
+/* Minimal UI for v86 ISO runner */
+:root{
+  --bg:#0c1220; --panel:#111827; --muted:#9aa2b1; --text:#f3f4f6;
+  --accent:#60a5fa; --danger:#ef4444; --ok:#34d399; --border:#1f2937; --card:#0f172a;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius:16px; --radius-sm:12px; --radius-xs:10px;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; font-family:var(--font); color:var(--text); background:radial-gradient(1200px 600px at 10% 0%, rgba(59,130,246,.2), transparent 60%), var(--bg);}
+.topbar{
+  position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:10px 14px; background:rgba(17,24,39,.85); border-bottom:1px solid var(--border); backdrop-filter: blur(8px); z-index:10;
+}
+.brand{display:flex; align-items:center; gap:10px}
+.brand img{width:22px; height:22px}
+.muted{color:var(--muted); font-size:.9rem}
+.actions{display:flex; gap:10px; flex-wrap:wrap}
+.button{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:var(--radius-xs);
+  background:#0b1222; border:1px solid var(--border); color:var(--text); cursor:pointer;
+}
+.button.primary{border-color:#1e3a8a; background:#0b1222; box-shadow: var(--shadow)}
+.button.danger{border-color:#7f1d1d}
+.button:active{transform:translateY(1px)}
+
+main{display:grid; grid-template-columns: 1fr 340px; gap:14px; padding:14px; height:calc(100vh - 62px)}
+.screen{
+  height:100%; background:#000; border-radius:var(--radius); border:1px solid var(--border); box-shadow:var(--shadow); display:grid; place-items:center; position:relative; overflow:hidden;
+}
+.drop-hint{color:#9ca3af; text-align:center; pointer-events:none}
+.sidebar{display:flex; flex-direction:column; gap:14px; overflow:auto}
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:12px; box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px 0; font-size:1.05rem}
+.card.small li{color:var(--muted); font-size:.92rem}
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+textarea#log{width:100%; height:160px; background:#0b1222; color:#d1d5db; border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px; resize:vertical; min-height:120px}
+
+@media (max-width: 1000px){
+  main{grid-template-columns:1fr}
+}

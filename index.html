@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>x86 ISO Runner (in-browser)</title>
+  <meta name="description" content="Run x86 ISOs in your browser using v86. Works on GitHub Pages." />
+  <link rel="icon" href="assets/cpu.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/cpu.svg" alt="" />
+      <strong>x86 ISO Runner</strong>
+      <span class="muted">powered by v86 (WASM)</span>
+    </div>
+    <nav class="actions">
+      <label class="button">
+        <input id="isoInput" type="file" accept=".iso,.img,.bin,.raw,.vhd" hidden />
+        Load ISO…
+      </label>
+      <label class="button">
+        <input id="hddInput" type="file" accept=".img,.bin" hidden />
+        Load HDD image…
+      </label>
+      <button id="btnStart" class="button primary">Start</button>
+      <button id="btnReset" class="button">Reset</button>
+      <button id="btnStop" class="button danger">Stop</button>
+      <button id="btnFullscreen" class="button">Fullscreen</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="screen" class="screen" aria-label="VM screen" tabindex="0">
+      <div class="drop-hint" id="dropHint">Drop an ISO here or use “Load ISO…”</div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="card">
+        <h3>Configuration</h3>
+        <div class="grid">
+          <label>RAM (MB) <input id="mem" type="number" min="32" max="2048" step="32" value="512"></label>
+          <label>VGA RAM (MB) <input id="vgamem" type="number" min="1" max="32" step="1" value="8"></label>
+          <label><input id="acpi" type="checkbox" checked> ACPI</label>
+          <label><input id="smp" type="checkbox"> SMP (2 vCPU)</label>
+          <label><input id="wasmFallback" type="checkbox"> WASM fallback</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Logs</h3>
+        <textarea id="log" readonly></textarea>
+      </div>
+
+      <div class="card small">
+        <h3>Notes</h3>
+        <ul>
+          <li>Works best with lightweight OS ISOs (Linux, FreeDOS, hobby OS). Modern Windows ISOs will not work.</li>
+          <li>Your ISO is used locally in the browser; nothing is uploaded.</li>
+          <li>Hold <kbd>Esc</kbd> to release pointer.</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- v86 core via jsDelivr CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/v86/build/libv86.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
